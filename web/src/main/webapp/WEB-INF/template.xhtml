@@ -63,7 +63,7 @@
                                     Agregar producto
                                 </a>
                             </li>
-                            <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <li jsf:rendered="#{seguridadBean.autenticadoB}">
                                 <a href="/usuario/mis_productos.xhtml" class="nav-link text-white"
                                    style="font-size: 0.95rem">
                                     <i class="pi pi-list bi d-block mx-auto mb-1" style="font-size: 1.3rem"></i>
@@ -165,6 +165,7 @@
                                                  style="margin-left:10px; width: 158px; height: 35px;"/>
                             </h:form>
                         </div>
+
                         <div jsf:rendered="#{seguridadBean.autenticadoA}">
                             <h:form>
                                 <span>Hola admin, #{seguridadBean.administradorSeccion.nombre}</span>

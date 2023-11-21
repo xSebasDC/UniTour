@@ -118,7 +118,7 @@ public class SeguridadBean implements Serializable {
     public String iniciarSesion() {
         if (!email.isEmpty() && !password.isEmpty()) {
             try {
-                if(email.equals("sebas@gmai.com")){
+                if(email.equals("admin@gmai.com")){
                     autenticadoB = true;
                 }
                 usuarioSeccion = usuarioServicio.iniciarSesión(email, password);

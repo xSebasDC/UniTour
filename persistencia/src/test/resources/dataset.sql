@@ -2,26 +2,26 @@ insert into ciudad values (1, "Armenia");
 insert into ciudad values (2, "Pereira");
 insert into ciudad values (3, "Medellin");
 
-insert into administrador values ("111", "pepito@gmail.com", "Pepito Perez", "gato", "PP");
+insert into administrador values ("111", "admin@gmail.com", "Administrador", "123", "Admin");
 
-insert into usuario values ("123", "michelle@gmail.com", "Michelle", "12345","michelleA", 1);
-insert into usuario values ("124", "tatiana@gmail.com", "Tatiana", "12346", "tatianaC", 1);
+insert into usuario values ("123", "mario@gmail.com", "Mario", "12345","michelleA", 1);
 insert into usuario values ("126", "carlos@gmail.com","Carlos", "12348","carlosI", 2);
-insert into usuario values ("125", "sebastian@gmail.com", "Sebastian", "12347","sebastiaD", 3);
+insert into usuario values ("125", "sebas@gmail.com", "Sebastian", "12347","sebastiaD", 3);
+insert into usuario values ("111", "admin@gmai.com", "Administrador", "123","Admin", 1);
 
 insert into usuario_telefonos values ("123", "3023891890");
-insert into usuario_telefonos values ("123", "3020202900");
-insert into usuario_telefonos values ("124", "3023586691");
-insert into usuario_telefonos values ("125", "3027890190");
+insert into usuario_telefonos values ("126", "3020202900");
+insert into usuario_telefonos values ("125", "3023586691");
+
 
 insert into producto values (5, "Telefono Iphone 7 como nuevo", 0.0, "2021/10/31", "Iphone 7", 800000.0, 0, 1, "123");
 insert into producto values (6, "Licuadora Imusa nuevo", 0.1, "2021/11/25", "Licuadora", 150000.0, 10, 2, "125");
 insert into producto values (3, "Computador accer nuevo", 0.0, "2021/10/19", "Computador accer", 1800000.0, 5, 3, "126");
 insert into producto values (4, "Celular en estado 10/10", 0.06, "2021/10/19", "IPhone 5", 1000000.0, 5, 3, "123");
 
-insert into categoria values (0, "Tecnología");
-insert into categoria values (1, "Hogar");
-insert into categoria values (2, "Oficina");
+insert into categoria values (0, "Ropa");
+insert into categoria values (1, "Souvenir");
+insert into categoria values (2, "Artesanias");
 
 insert into categoria_lista_productos values (0, 1);
 insert into categoria_lista_productos values (1, 1);
@@ -37,7 +37,7 @@ insert into chat values (11, 1, "123");
 insert into chat values (22, 2, "123");
 insert into chat values (33, 3, "123");
 
-insert into mensaje values (313, "Michelle", "2021/11/10", "Que lindo", 11);
+insert into mensaje values (313, "Mario", "2021/11/10", "Que lindo", 11);
 insert into mensaje values (314, "Tatiana", "2021/11/13", "Muy práctico", 11);
 insert into mensaje values (315, "Sebastian", "2021/10/10", "Excelente", 33);
 
