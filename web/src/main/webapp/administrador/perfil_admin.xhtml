@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="../WEB-INF/template.xhtml">
+    <ui:define name="title"> Login </ui:define>
+    <ui:define name="content">
+        <div class="row">
+
+            <div class="col-3">
+                <div class="card" align="center" style="align-items: center; padding: 15px">
+                    <img src="/uploads/avatar.png" class="rounded-circle p-1 bg-primary" width="110" alt="img"/>
+                    <div class="mt-3">
+                        <h4>#{administradorBean.adminSeccion.nombre}</h4>
+                    </div>
+                    <h6 class="mb-1"> Email <span class="text-secondary">#{administradorBean.adminSeccion.email} </span>
+                    </h6>
+                    <h6 class="mb-1"> Username <span
+                            class="text-secondary">#{administradorBean.adminSeccion.username} </span></h6>
+                    <h6 class="mb-1"> Cédula <span
+                            class="text-secondary">#{administradorBean.adminSeccion.codigo} </span></h6>
+                </div>
+            </div>
+
+            <div class="col-9">
+                <p:panel header="Reportes">
+                    <div class="card" align="center" style="align-items: center; margin: 20px; padding: 30px">
+                        <h4 style="color: black; font-weight: bold;">Cantidad de productos por cada ciudad</h4>
+                        <p:barChart model="#{administradorBean.barProductosCiudad}" style="width: 700px; height: 400px; "
+                                    rendered="#{administradorBean.barProductosCiudad != null}"/>
+                    </div>
+                    <div class="card" align="center" style="align-items: center; margin: 20px; padding: 30px">
+                        <h4 style="color: black; font-weight: bold;">Productos de cada categoría</h4>
+                        <p:chart type="pie" model="#{administradorBean.pieProductosCategoria}" style="width: 400px; height: 280px; margin-top: 10px"
+                                 rendered="#{administradorBean.pieProductosCategoria != null}"/>
+                    </div>
+                    <div class="card" align="center" style="align-items: center; margin: 20px; padding: 30px">
+                        <h4 style="color: black; font-weight: bold;">Puntuación promedio de los productos</h4>
+                        <p:barChart model="#{administradorBean.barProductosCalificacion}" style="width: 700px; height: 400px; "
+                                    rendered="#{administradorBean.barProductosCalificacion != null}"/>
+                    </div>
+                    <div class="card" align="center" style="align-items: center; margin: 20px; padding: 30px">
+                        <h4 style="color: black; font-weight: bold;">Cantidad de usuarios por cada ciudad</h4>
+                        <p:chart type="pie" model="#{administradorBean.pieUsuariosCiudad}" style="width: 400px; height: 280px; margin-top: 10px"
+                                 rendered="#{administradorBean.pieUsuariosCiudad != null}"/>
+                    </div>
+                    <div class="card" align="center" style="align-items: center; margin: 20px; padding: 30px">
+                        <h4 style="color: black; font-weight: bold;">Cantidad de publicaciones de los usuarios</h4>
+                        <p:barChart model="#{administradorBean.barPublicacionesUsuario}" style="width: 700px; height: 400px; "
+                                    rendered="#{administradorBean.barPublicacionesUsuario != null}"/>
+                    </div>
+                </p:panel>
+            </div>
+
+        </div>
+
+        <p:dialog id="dialogoConfirmacionEliminar" header="Confirmación" modal="true" widgetVar="confirmacionEliminar"
+                  Height="400px"
+                  width="31%" showEffect="fade" draggable="false" rendered="#{seguridadBean.autenticado}">
+            <p>¿Está seguro de que desea eliminar el producto?</p>
+            <div class="container" align="center" style="margin-top: 30px">
+                <p:commandButton value="Aceptar" styleClass="btn-white border-secondary bg-white"
+                                 style="height: 35px; margin-right: 10px; text-align: center"
+                                 action="#{productoBean.eliminarProducto}"/>
+                <p:commandButton value="Cancelar" styleClass="rounded-button ui-button-info"
+                                 style="font-size: 15px;" action="/usuario/perfil?faces-redirect=true"/>
+            </div>
+        </p:dialog>
+
+        <p:dialog id="dialogoConfirmacionSubasta" header="Confirmación" modal="true" widgetVar="confirmacionSubastar"
+                  Height="400px"
+                  width="31%" showEffect="fade" draggable="false" rendered="#{seguridadBean.autenticado}">
+            <p>¿Está seguro de que desea subastar el producto?</p>
+            <div class="container" align="center" style="margin-top: 30px">
+                <p:commandButton value="Aceptar" styleClass="btn-white border-secondary bg-white"
+                                 style="height: 35px; margin-right: 10px; text-align: center"
+                                 action="#{productoBean.subastarProducto}"/>
+                <p:commandButton value="Cancelar" styleClass="rounded-button ui-button-info"
+                                 style="font-size: 15px;" onclick="PF('confirmacionSubastar').hide()"/>
+            </div>
+        </p:dialog>
+    </ui:define>
+</ui:composition>
+
+
+</html>

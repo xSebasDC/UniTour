@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title"> Inicio </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <h1>Lista de Subastas</h1>
+            <p:dataView value="#{inicioBean.listaSubastas}" var="producto" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+                <h1>entra</h1>
+                <p:dataViewListItem>
+                    <div class="row d-flex item-pro">
+                        <div class="col-lg-2 col-md-1" style="text-align: center">
+                            <p:graphicImage url="/uploads/#{producto.imagenPrincipal}" style="width: 100px"
+                                            class="img fluid d-none d-md-block rounded mb-2 shadow"/>
+                        </div>
+                        <div class="col-lg-8 col-md-1 align-self-center">
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:"/>
+                                    <h:outputText value="#{producto.nombre}" style="font-weight:bold"/>
+                                    <h:outputText value="Precio:"/>
+                                    <h:outputText value="$ #{producto.precio}"/>
+                                    <h:outputText value="Categorías:"/>
+                                    <p:repeat value="#{producto.listaCategorias}" var="cat">
+                                        <p:chip style="font-size: 13px; margin-left: 5px" label="#{cat}"/>
+                                    </p:repeat>
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </div>
+                        <div class="col-lg-2 col-md-1 align-self-center">
+                            <p:commandButton id="btnDetalle" value="Ver detalle"
+                                             action="#{inicioBean.irAlDetalle(producto.codigo)}"
+                                             styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right"/>
+                        </div>
+                        <div class="container" align="right">
+                            <h:form rendered="#{seguridadBean.autenticado}">
+                            <p:commandButton id="btnSubastar"
+                                             onclick="PF('confirmarSubasta').show()"
+                                             style="height: 30px; width: 30px;margin-left: 10px"
+                                             styleClass="btn btn-white border-secondary bg-white"
+                                             update="@form"
+                                             icon="pi pi-tag" iconPos="right"
+                                             action="#{productoBean.seleccionarProducto(producto.codigo)}"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </p:dataViewListItem>
+            </p:dataView>
+        </h:form>
+
+        <p:dialog id="dialogoConfirmacionSubasta" header="Confirmación" modal="true" widgetVar="confirmarSubasta"
+                  Height="400px"
+                  width="31%" showEffect="fade" draggable="false" rendered="#{seguridadBean.autenticado}">
+            <p>Ingrese su oferta</p>
+            <p:inputText id="precio_p" value="#{productoBean.precioSubasta}" style="width: 96%" required="true" />
+            <div class="container" align="center" style="margin-top: 30px;">
+                <p:commandButton value="Aceptar" styleClass="btn-white border-secondary bg-white"
+                                 style="height: 35px; margin-right: 10px; text-align: center"
+                                 action="/subastas?faces-redirect=true"/>
+                <p:commandButton value="Cancelar" styleClass="rounded-button ui-button-info"
+                                 style="font-size: 15px;" action="/subastas?faces-redirect=true"/>
+            </div>
+        </p:dialog>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </ui:define>
+</ui:composition>
+</html>

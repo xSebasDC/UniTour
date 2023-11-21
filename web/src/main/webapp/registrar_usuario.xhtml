@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title"> Registro de usuario </ui:define>
+    <ui:define name="content">
+        <div class="container" align="center" >
+        <p:card styleClass="card"
+                style="width: 100%; margin: 2% -5%; max-width: max-content; resize: both; alignment: center !important;">
+            <h2 align="center" style="margin-bottom: 2%">¡Regístrese!</h2>
+            <p style="margin: 0% 5%; text-align: left !important;">Ingresa tu datos para registrarte y poder acceder a todos los servicios de UniShop.</p>
+            <h:form>
+                <div class="container" align="center" >
+                    <p:divider/>
+        <h:panelGrid columns="3" cellpadding="5" align="center" style="margin: 0% 3%;">
+            <p:outputLabel value="Cédula: " for="codigo_u"/>
+            <p:inputText id="codigo_u" value="#{usuarioBean.usuario.codigo}" required="true" style="width: 300px"/>
+            <p:message for = "codigo_u" />
+
+            <p:outputLabel value="Nombre: " for="nombre_u"/>
+            <p:inputText id="nombre_u" value="#{usuarioBean.usuario.nombre}" required="true" style="width: 300px" />
+            <p:message for = "nombre_u" />
+
+            <p:outputLabel value="Email: " for="email_u"/>
+            <p:inputText id="email_u" value="#{usuarioBean.usuario.email}" required="true" style="width: 300px"/>
+            <p:message for = "email_u" />
+
+            <p:outputLabel value="Nickname: " for="nick_u"/>
+            <p:inputText id="nick_u" value="#{usuarioBean.usuario.username}" required="true" style="width: 300px"/>
+            <p:message for = "nick_u" />
+
+            <p:outputLabel value="Contraseña: " for="pass_u"/>
+            <p:password id="pass_u" value="#{usuarioBean.usuario.password}" toggleMask="true" feedback="true"
+                        promptLabel="Ingresa tu contraseña" weakLabel="Débil"
+                        goodLabel="Buena" strongLabel="Fuerte" required="true" style="width: 300px"/>
+            <p:message for = "pass_u" />
+
+            <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
+            <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudad}"
+                             converter="#{ciudadConverter}"
+                             redisplay="true" style="width: 300px" requiredMessage="Ups! olvidaste seleccionar la ciudad">
+                <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.ciudades}"/>
+            </p:selectOneMenu>
+            <p:message for = "ciudad_usuario" />
+
+        </h:panelGrid>
+                    <p:growl showDetail="true" for = "msj-bean"/>
+                </div>
+        <div class="row" >
+            <div align="center" style="margin: 25px auto 25px;">
+                <p:commandButton value="Registrar usuario" action="#{usuarioBean.registrarUsuario}"
+                                 icon="pi pi-user-plus" update="@form"/>
+            </div>
+        </div>
+            </h:form>
+        </p:card>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

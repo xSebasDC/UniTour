@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="WEB-INF/template.xhtml">
+<ui:define name="title"> Login </ui:define>
+<ui:define name="content">
+
+    <div class="card" align="center" style="align-items: center; margin-bottom: 20px">
+        <div style="margin: 2% 5%">
+            <div class="mt-3">
+                <h5 style="font-weight: bold">Productos más vendidos</h5>
+                <h:form>
+                    <p:dataView var="producto" value="#{productoBean.productosMasVendidos}" listIcon="pi pi-bars"
+                                style="width: 800px">
+                        <p:dataViewListItem>
+                            <div class="row d-flex item-pro">
+                                <div class="col-lg-2 col-md-1" style="text-align: center">
+                                    <p:graphicImage url="/uploads/#{producto.imagenPrincipal}"
+                                                    style="width: 100px; margin-left: 20px"
+                                                    class="img fluid d-none d-md-block rounded mb-2 shadow"/>
+                                </div>
+                                <div class="col-lg-7 col-md-1 align-self-center">
+                                    <p:outputPanel>
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <h:outputText value="Nombre:"/>
+                                            <h:outputText value="#{producto.nombre}"
+                                                          style="font-weight:bold"/>
+                                            <h:outputText value="Precio:"/>
+                                            <h:outputText value="$ #{producto.precio}"/>
+                                            <h:outputText value="Categorías:"/>
+                                            <p:repeat value="#{producto.listaCategorias}" var="cat">
+                                                <p:chip style="font-size: 13px; margin-left: 5px"
+                                                        label="#{cat}"/>
+                                            </p:repeat>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                </div>
+                                <div class="col-lg-3 col-md-1 align-self-center">
+                                    <p:commandButton id="btnDetalle"
+                                                     action="#{inicioBean.irAlDetalle(producto.codigo)}"
+                                                     value="Ver detalle"
+                                                     style=" font-size: 90%; height: 29px; width: 120px"
+                                                     styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                     iconPos="right"/>
+                                </div>
+                            </div>
+
+                        </p:dataViewListItem>
+                    </p:dataView>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</ui:define>
+
+</ui:composition>
+</html>

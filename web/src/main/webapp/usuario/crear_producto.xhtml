@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="../WEB-INF/template.xhtml">
+    <ui:define name="title"> Publicar producto </ui:define>
+    <ui:define name="content">
+        <div class="container" align="center" >
+        <p:card styleClass="card"
+                style="width: 70%; margin: 2% -5%; max-width: 100%; resize: both; alignment: center !important;">
+        <h2 align="center" style="margin-bottom: 4%">¡Agrega un producto!</h2>
+        <p style="margin: 2% 5%; text-align: left !important;">Ingresa los datos del producto para crear una nueva publicación.</p>
+            <div class="container" align="left" >
+                <p:divider style="margin-top: 25px;"/>
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5" style="margin-top: 30px">
+                    <p:outputLabel value="Nombre: " for="nombre_p" style="width: 105px"/>
+                    <p:inputText id="nombre_p" style="width: 520px; " value="#{productoBean.producto.nombre}" required="true"/>
+                    <p:message for = "nombre_p" />
+                </h:panelGrid>
+
+                <h:panelGrid columns="3" cellpadding="5" >
+                    <p:outputLabel value="Descripción: " for="descripcion_p" style="width: 105px; margin-top: 20px;" />
+                    <p:textEditor id="descripcion_p" style="width: 520px;" value="#{productoBean.producto.descripcion}" height="60" secure="false"/>
+                    <p:message for = "descripcion_p" />
+                </h:panelGrid>
+                <h:panelGrid columns="4" cellpadding="5">
+
+                    <p:outputLabel value="Unidades: " for="unidades_p" style="width: 105px" />
+                    <p:inputText id="unidades_p" value="#{productoBean.producto.unidades}" required="true" type="number"/>
+
+                    <p:outputLabel value="Precio: " for="precio_p" style="margin-left: 30px; width: 80px"/>
+                    <p:inputText id="precio_p" value="#{productoBean.producto.precio}" style="width: 96%" required="true" type="number"/>
+
+                    <p:outputLabel value="Descuento: " for="descuento_p" style="width: 105px"/>
+                    <p:inputNumber id="descuento_p" value="#{productoBean.producto.descuento}" symbol="%"
+                                   symbolPosition="s" emptyValue="zero"/>
+
+                    <p:outputLabel for="ciudad_producto" value="Ciudad:" style="margin-left: 30px; width: 80px"/>
+                    <p:selectOneMenu id="ciudad_producto" value="#{productoBean.producto.ciudad}"
+                                     converter="#{ciudadConverter}"
+                                     redisplay="true" style="width: 96%" requiredMessage="Ups! olvidaste seleccionar la ciudad">
+                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{productoBean.ciudades}"/>
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="3" cellpadding="5" >
+                    <p:outputLabel for="categorias_p" value="Categorías"/>
+                    <p:selectCheckboxMenu id="categorias_p" value="#{productoBean.categoriasSeleccionadas}" label="Categorías" style="width: 520px" required="true"
+                                          multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 15rem" scrollHeight="250" converter="#{categoriaConverter}">
+                        <f:selectItems var="categoria" itemLabel="#{categoria.nombre}" value="#{productoBean.categorias}"/>
+                    </p:selectCheckboxMenu>
+                    <p:message for = "categorias_p" />
+
+                    <p:outputLabel for="imagenes_producto" value="Imagenes: " style="margin-left: 5%; width: 105px"/>
+                    <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced" required="true"
+                                  multiple="true" sizeLimit="1000000" fileLimit="5" style="height: 150px; max-width: 520px; width: 520px;  "
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" skinSimple="true"/>
+                    <p:message for = "imagenes_producto" />
+                </h:panelGrid>
+                <p:growl showDetail="true" for = "msj-bean" />
+                <div align="center" style="margin-top: 29px;">
+                    <p:commandButton style="margin-top: 0.01%" value="Publicar producto" action="#{productoBean.publicarProducto}"  update="@form" icon="pi pi-plus"/>
+                </div>
+            </h:form>
+            </div>
+        </p:card>
+    </div>
+    </ui:define>
+</ui:composition>
+</html>

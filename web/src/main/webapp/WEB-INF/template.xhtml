@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title> UniTour | <ui:insert name="title"> Plantilla </ui:insert></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous"></link>
+    <link href="/resources/css/style.css" rel="stylesheet"/>
+</h:head>
+
+<h:body>
+    <div id="header">
+        <ui:insert name="header">
+            <div class="px-3 py-2 bg-primary text-white">
+                <div class="container">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <a href="/"
+                           class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                            <span class="pi pi-map-marker" style="font-size: 2.5rem; margin-right: 10px"></span>
+                            <span class="fs-4">UniTour</span>
+                        </a>
+
+                        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small"
+                            style="text-align: center">
+                            <li>
+                                <a href="/index.xhtml" class="nav-link text-white" style="font-size: 0.95rem">
+                                    <i class="pi pi-home bi d-block mx-auto mb-1" style="font-size: 1.3rem"></i>
+                                    Home
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{!seguridadBean.autenticadoA}">
+                                <a href="/subastas.xhtml" class="nav-link text-white" style="font-size: 0.95rem">
+                                    <i class="pi pi-chart-bar d-block mx-auto mb-1" style="font-size: 1.3rem"></i>
+                                    Subastas
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{!seguridadBean.autenticadoA}">
+                                <a href="/ofertas.xhtml" class="nav-link text-white" style="font-size: 0.95rem">
+                                    <i class="pi pi-percentage d-block mx-auto mb-1" style="font-size: 1.3rem"></i>
+                                    Ofertas
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{!seguridadBean.autenticadoA}">
+                                <a href="/productosMasVendidos.xhtml" class="nav-link text-white" style="font-size: 0.95rem">
+                                    <i class="pi pi-star d-block mx-auto mb-1" style="font-size: 1.3rem"></i>
+                                    Más vendidos
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{seguridadBean.autenticadoB}">
+                                <a href="/usuario/crear_producto.xhtml" class="nav-link text-white"
+                                   style="font-size: 0.95rem">
+                                    <i class="pi pi-save bi d-block mx-auto mb-1" style="font-size: 1.3rem"></i>
+                                    Agregar producto
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{seguridadBean.autenticado}">
+                                <a href="/usuario/mis_productos.xhtml" class="nav-link text-white"
+                                   style="font-size: 0.95rem">
+                                    <i class="pi pi-list bi d-block mx-auto mb-1" style="font-size: 1.3rem"></i>
+                                    Mis productos
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{seguridadBean.autenticado}">
+                                <a href="/usuario/compras_usuario.xhtml" class="nav-link text-white"
+                                   style="font-size: 0.95rem">
+                                    <i class="pi pi-dollar bi d-block mx-auto mb-1" style="font-size: 1.3rem"></i>
+                                    Compras
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{seguridadBean.autenticado}">
+                                <a href="/usuario/carrito.xhtml" class="nav-link text-white" style="font-size: 0.95rem">
+                                    <i class="pi pi-shopping-cart bi d-block mx-auto mb-1"
+                                       style="font-size: 1.3rem"></i>
+                                    Carrito
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{seguridadBean.autenticadoA}">
+                                <a href="/registrar_usuario.xhtml" class="nav-link text-white" style="font-size: 0.95rem">
+                                    <i class="pi pi-user-plus bi d-block mx-auto mb-1"
+                                       style="font-size: 1.3rem"></i>
+                                    Agregar usuario
+                                </a>
+                            </li>
+                            <li jsf:rendered="#{seguridadBean.autenticadoA}">
+                                <a href="/administrador/perfil_admin.xhtml" class="nav-link text-white" style="font-size: 0.95rem">
+                                    <i class="pi pi-user bi d-block mx-auto mb-1"
+                                       style="font-size: 1.3rem"></i>
+                                    Mi perfil
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3 py-2 border-bottom mb-3">
+                <div class="container d-flex flex-wrap justify-content-center">
+                    <div class="col-6 col-lg-auto mb-2 mb-lg-0 me-lg-auto input-search ui-inputgroup">
+                        <h:form rendered="#{!seguridadBean.autenticadoA}">
+                            <h:panelGrid columns="2">
+                                <p:selectOneMenu id="menu" value="#{inicioBean.categoriaSeleccionada}"
+                                                 converter="#{categoriaConverter}"
+                                                 style="width: 220px; height: 33px; border: none; margin-top: 7px">
+                                    <f:selectItem itemLabel="Seleccione una categoria" noSelectionOption="true"/>
+                                    <f:selectItems var="categoria" itemLabel="#{categoria.nombre}"
+                                                   value="#{inicioBean.categorias}"/>
+                                    <p:ajax event="change" update="@form"
+                                            listener="#{inicioBean.irAProductosCategoria}"/>
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
+
+                    <div class="col-4 col-lg-auto mb-2 mb-lg-0 me-lg-auto input-search ui-inputgroup"
+                         style="margin-top: 6px" align="center">
+
+                        <h:form rendered="#{!seguridadBean.autenticadoA}">
+                            <p:inputText style="width: 340px; height: 36px; border-radius: 8px 0px 0px 8px;" placeholder="¿Qué producto está buscando?"
+                                         required="true" value="#{busquedaBean.busqueda}" />
+                            <p:commandButton icon="pi pi-search" action="#{busquedaBean.buscar}" update="@form" style="border-radius: 0px 8px 8px 0px; height: 36px;"/>
+                        </h:form>
+
+                    </div>
+
+                    <div class="col-4 col-lg-auto mb-2 mb-lg-0 me-lg-auto input-search ui-inputgroup"
+                         style="margin-top: 6px">
+
+                        <h:form rendered="#{seguridadBean.autenticadoA}">
+                            <p:inputText style="width: 340px; height: 38px" placeholder="¿Qué usuario está buscando?"
+                                         required="true" value="#{busquedaBean.busqueda}"/>
+                            <p:commandButton icon="pi pi-search" action="#{busquedaBean.buscar}" update="@form"/>
+                        </h:form>
+
+                    </div>
+
+                    <div class="text-end" style="margin-top: 6px">
+                        <h:form rendered="#{!seguridadBean.autenticado and !seguridadBean.autenticadoA}" >
+
+                            <p:commandButton style="margin-right: 5px;" styleClass="ui-button-flat ui-button-info"
+                                             onclick="PF('inicioSeccion').show()" value="Iniciar sesión"/>
+                            <p:commandButton action="/registrar_usuario?faces-redirect=true"
+                                             styleClass="rounded-button ui-button-info" value="Registrarme"/>
+                            </h:form>
+
+
+                        <div jsf:rendered="#{seguridadBean.autenticado}">
+                            <h:form>
+                                <p:commandButton action="/usuario/perfil?faces-redirect=true"
+                                                 value="#{seguridadBean.usuarioSeccion.username}" icon="pi pi-user"
+                                                 style="margin-right:0px; width: 130px; height: 35px; text-decoration:none !important;"
+                                                 styleClass="rounded-button ui-button-raised ui-button-secondary">
+                                </p:commandButton>
+                                <p:commandButton styleClass="ui-button-flat ui-button-info" value="Cerrar sesión"
+                                                 action="#{seguridadBean.cerrarSeccion}" icon="pi pi-sign-out"
+                                                 iconPos="right"
+                                                 style="margin-left:10px; width: 158px; height: 35px;"/>
+                            </h:form>
+                        </div>
+                        <div jsf:rendered="#{seguridadBean.autenticadoA}">
+                            <h:form>
+                                <span>Hola admin, #{seguridadBean.administradorSeccion.nombre}</span>
+                                <p:commandButton styleClass="ui-button-flat ui-button-info" value="Cerrar sesión"
+                                                 action="#{seguridadBean.cerrarSeccion}" icon="pi pi-sign-out"
+                                                 iconPos="right"
+                                                 style="margin-left:10px; width: 158px; height: 35px;"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p:dialog id="dialogo" header="Inicio de sesión" modal="true" widgetVar="inicioSeccion" Height="400px"
+                      width="47%" showEffect="fade" draggable="false" rendered="#{!seguridadBean.autenticado}">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <p:outputLabel value="Email: " for="email_u"/>
+                            <p:inputText id="email_u" value="#{seguridadBean.email}" styleClass="p-d-block"
+                                         style="width: 250px; height: 30px; margin-top: 1%"
+                                         required="true" requiredMessage="¡Ups! olvidaste el email"/>
+                            <p:message for="email_u"/>
+                            <p:outputLabel value="Contraseña: " for="pass_u"
+                                           style="margin-top: 5%; width: 100px; margin-right: 5px"/>
+                            <p:password id="pass_u" value="#{seguridadBean.password}"
+                                        style="width: 250px; height: 30px; margin-top: 1%"
+                                        required="true" requiredMessage="¡Ups! olvidaste la contraseña"/>
+                            <p:message for="pass_u"/>
+                        </h:panelGrid>
+                        <div class="fotox">
+                            <img src="resources/img/perfil.png" style="width: 100px" alt=""/>
+                        </div>
+                    </h:panelGrid>
+                    <p:commandButton style="min-width: 30%; margin-right: 10px;" value="Iniciar"
+                                     action="#{seguridadBean.iniciarSesion}"
+                                     styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left"/>
+
+                    <p:commandButton style="min-width: 30%" value="Recuperar contraseña"
+                                     styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
+                                     onclick="PF('recuperar_contrasenia').show()"/>
+                    <p:growl showDetail="true" for="login-bean"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog id="dialogoRecuperacion" header="Recuperación de contraseña" modal="true" widgetVar="recuperar_contrasenia" Height="20%"
+                      width="38%" showEffect="fade" draggable="false" rendered="#{!seguridadBean.autenticado}">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:panelGrid columns="1" cellpadding="4">
+                            <p:outputLabel value="Email: " for="email_r"/>
+                            <p:inputText id="email_r" value="#{seguridadBean.emailR}" styleClass="p-d-block"
+                                         style="width: 250px; height: 30px; margin-top: 1%"
+                                         required="true" requiredMessage="¡Ups! ingresa el email"/>
+                            <p:message for="email_r"/>
+                        </h:panelGrid>
+                        <div class="fotox" style="margin-left: 25px">
+                            <img src="resources/img/password.png" style="width: 80px" alt=""/>
+                        </div>
+                    </h:panelGrid>
+                    <div class="container" align="center">
+                    <p:commandButton style="min-width: 30%; margin-right: 10px;" value="Aceptar"
+                                     action="#{seguridadBean.recuperarContrasenia}"
+                                     styleClass="mt-4" update="@form" iconPos="left"/>
+                    </div>
+                    <p:growl showDetail="true" for="login-bean"/>
+
+                </h:form>
+
+            </p:dialog>
+
+        </ui:insert>
+    </div>
+
+    <div id="content">
+        <div class="container">
+            <ui:insert name="content">Contenido del documento</ui:insert>
+        </div>
+
+    </div>
+
+    <div id="footer" class="footer mt-5">
+        <ui:insert name="footer">
+            <div class="py-4 bg-light" align="center">
+                <div class="justify-content-center">
+                    <div class="col-10">
+                        <span>Sebastián Delgado - Mario Tabares - </span>
+                        <span>Universidad del Quindío - Bases de datos II - 2023</span>
+                    </div>
+                </div>
+            </div>
+        </ui:insert>
+    </div>
+
+</h:body>
+
+</html>

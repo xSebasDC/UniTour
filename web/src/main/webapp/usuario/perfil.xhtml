@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="../WEB-INF/template.xhtml">
+    <ui:define name="title"> Login </ui:define>
+    <ui:define name="content">
+        <div class="row">
+
+            <div class="col-3">
+                <div class="card" align="center" style="align-items: center; padding: 15px">
+                    <img src="/uploads/avatar.png" class="rounded-circle p-1 bg-primary" width="110" alt="img"/>
+                    <div class="mt-3">
+                        <h4>#{usuarioBean.usuarioSeccion.nombre}</h4>
+                        <p class="text-muted font-size-sm">#{usuarioBean.usuarioSeccion.ciudad.nombre}
+                            <i class="pi pi-map-marker" style="font-size: 1rem"></i></p>
+                    </div>
+                    <h6 class="mb-1"> Email <span class="text-secondary">#{usuarioBean.usuarioSeccion.email} </span>
+                    </h6>
+                    <h6 class="mb-1"> Username <span
+                            class="text-secondary">#{usuarioBean.usuarioSeccion.username} </span></h6>
+                    <h6 class="mb-1"> Cédula <span
+                            class="text-secondary">#{usuarioBean.usuarioSeccion.codigo} </span></h6>
+                </div>
+            </div>
+
+            <div class="col-9">
+
+                <div class="card" align="center" style="align-items: center; margin-bottom: 20px">
+                    <div style="margin: 2% 5%">
+                        <div class="mt-3">
+                            <h5 style="font-weight: bold">Lista de favoritos</h5>
+                            <h:form>
+                                <p:dataView var="producto1" value="#{usuarioBean.favoritos}" varStatus="p"
+                                            listIcon="pi pi-bars"
+                                            style="width: 800px">
+                                    <p:dataViewListItem>
+                                        <div class="container" align="right">
+                                            <p:commandButton icon="pi pi-trash"
+                                                             styleClass="btn btn-white border-secondary bg-white btn-md mb-2"
+                                                             action="#{usuarioBean.eliminarDeFavoritos(p.index)}"
+                                                             update="@form"
+                                                             style="height: 30px; width: 30px;margin-left: 60px"/>
+                                        </div>
+
+                                        <div class="row d-flex item-pro">
+                                            <div class="col-lg-2 col-md-1" style="text-align: center">
+                                                <p:graphicImage url="/uploads/#{producto1.imagenPrincipal}"
+                                                                style="width: 100px; margin-left: 20px"
+                                                                class="img fluid d-none d-md-block rounded mb-2 shadow"/>
+                                            </div>
+                                            <div class="col-lg-7 col-md-1 align-self-center">
+                                                <p:outputPanel>
+                                                    <h:panelGrid columns="2" cellpadding="5">
+                                                        <h:outputText value="Nombre:"/>
+                                                        <h:outputText value="#{producto1.nombre}"
+                                                                      style="font-weight:bold"/>
+                                                        <h:outputText value="Precio:"/>
+                                                        <h:outputText value="$ #{producto1.precio}"/>
+                                                    </h:panelGrid>
+                                                </p:outputPanel>
+                                            </div>
+                                            <div class="col-lg-3 col-md-1 align-self-center">
+                                                <p:commandButton id="btnDetalleFavorito"
+                                                                 action="#{inicioBean.irAlDetalle(producto.codigo)}"
+                                                                 value="Ver detalle"
+                                                                 style=" font-size: 90%; height: 29px; width: 120px"
+                                                                 styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                                 iconPos="right"/>
+                                            </div>
+                                        </div>
+                                    </p:dataViewListItem>
+                                </p:dataView>
+                            </h:form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" align="center" style="align-items: center; margin-bottom: 20px">
+                    <div style="margin: 2% 5%">
+                        <div class="mt-3">
+                            <h5 style="font-weight: bold">Tus productos vigentes</h5>
+                            <h:form>
+                                <p:dataView var="producto" value="#{usuarioBean.listaProductos}" listIcon="pi pi-bars"
+                                            style="width: 800px">
+                                    <p:dataViewListItem>
+                                        <div class="container" align="right">
+                                            <p:commandButton id="btnEliminar"
+                                                             onclick="PF('confirmacionEliminar').show()"
+                                                             style="height: 30px; width: 30px;margin-left: 10px"
+                                                             styleClass="btn btn-white border-secondary bg-white"
+                                                             update="@form"
+                                                             icon="pi pi-trash" iconPos="right"
+                                                             action="#{productoBean.seleccionarProducto(producto.codigo)}"/>
+                                            <p:commandButton id="btnGestionar" onclick="PF('edicionProducto').show()"
+                                                             action="#{productoBean.seleccionarProducto(producto.codigo)}"
+                                                             style="height: 30px; width: 30px; margin-left: 10px;"
+                                                             styleClass="btn btn-white border-secondary bg-white"
+                                                             icon="pi pi-pencil" iconPos="right"/>
+                                        </div>
+
+                                        <div class="row d-flex item-pro">
+                                            <div class="col-lg-2 col-md-1" style="text-align: center">
+                                                <p:graphicImage url="/uploads/#{producto.imagenPrincipal}"
+                                                                style="width: 100px; margin-left: 20px"
+                                                                class="img fluid d-none d-md-block rounded mb-2 shadow"/>
+                                            </div>
+                                            <div class="col-lg-7 col-md-1 align-self-center">
+                                                <p:outputPanel>
+                                                    <h:panelGrid columns="2" cellpadding="5">
+                                                        <h:outputText value="Nombre:"/>
+                                                        <h:outputText value="#{producto.nombre}"
+                                                                      style="font-weight:bold"/>
+                                                        <h:outputText value="Precio:"/>
+                                                        <h:outputText value="$ #{producto.precio}"/>
+                                                        <h:outputText value="Categorías:"/>
+                                                        <p:repeat value="#{producto.listaCategorias}" var="cat">
+                                                            <p:chip style="font-size: 13px; margin-left: 5px"
+                                                                    label="#{cat}"/>
+                                                        </p:repeat>
+                                                    </h:panelGrid>
+                                                </p:outputPanel>
+                                            </div>
+                                            <div class="col-lg-3 col-md-1 align-self-center">
+                                                <p:commandButton id="btnDetalle"
+                                                                 action="#{inicioBean.irAlDetalle(producto.codigo)}"
+                                                                 value="Ver detalle"
+                                                                 style=" font-size: 90%; height: 29px; width: 120px"
+                                                                 styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                                 iconPos="right"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="container" align="right">
+                                            <p:commandButton id="btnSubastar"
+                                                             onclick="PF('confirmacionSubastar').show()"
+                                                             value="Subastar"
+                                                             style="height: 32px; width: 105px;margin-left: 10px; font-size: 80%;"
+                                                             styleClass="ui-button-raised ui-button-help ui-button-flat"
+                                                             update="@form" icon="pi pi-tag" iconPos="right"
+                                                             action="#{productoBean.seleccionarProducto(producto.codigo)}"/>
+                                        </div>
+                                    </p:dataViewListItem>
+                                </p:dataView>
+                            </h:form>
+                            <p:dialog id="editarP" modal="true" widgetVar="edicionProducto" Height="200px"
+                                      width="60%" showEffect="fade" draggable="false"
+                                      rendered="#{seguridadBean.autenticado}">
+                                <p:card styleClass="card"
+                                        style=" alignment: center !important; padding: -10px">
+                                    <h2 align="center" style="margin-bottom: 2%">Edite el producto seleccionado</h2>
+                                    <p style="margin: 0% 5%; text-align: left !important;">Edita algunos datos de un producto ya registrado en UniShop.</p>
+                                    <h:form>
+                                        <div class="container" align="center">
+                                            <p:divider/>
+                                            <h:panelGrid columns="3" cellpadding="5">
+                                                <p:outputLabel value="Nombre: " for="nombre_u" style="width: 106px"/>
+                                                <p:inputText id="nombre_u" value="#{productoBean.nombre}"
+                                                             style="width: 519px"/>
+                                                <p:message for="nombre_u"/>
+                                            </h:panelGrid>
+
+                                            <h:panelGrid columns="3" cellpadding="5">
+                                                <p:outputLabel value="Descripción: " for="descripcion_p"
+                                                               style="width: 105px; margin-top: 20px;"/>
+                                                <p:textEditor id="descripcion_p" style="width: 520px;"
+                                                              value="#{productoBean.descripcion}" height="60"
+                                                              secure="false"/>
+                                                <p:message for="descripcion_p"/>
+                                            </h:panelGrid>
+
+                                            <h:panelGrid columns="4" cellpadding="5">
+                                                <p:outputLabel value="Unidades: " for="unidades_p"
+                                                               style="width: 105px"/>
+                                                <p:inputText id="unidades_p" value="#{productoBean.unidades}"
+                                                             required="true" type="number"/>
+
+                                                <p:outputLabel value="Precio: " for="precio_p"
+                                                               style="margin-left: 30px; width: 80px"/>
+                                                <p:inputText id="precio_p" value="#{productoBean.precio}"
+                                                             style="width: 96%"
+                                                             required="true" type="number"/>
+
+                                                <p:outputLabel value="Descuento: " for="descuento_p"
+                                                               style="width: 105px"/>
+                                                <p:inputNumber id="descuento_p" value="#{productoBean.descuento}"
+                                                               symbol="%"
+                                                               symbolPosition="s" emptyValue="zero"/>
+                                            </h:panelGrid>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div align="center" style="margin: 10px auto 0px;">
+                                                <p:commandButton value="Actualizar producto"
+                                                                 action="#{productoBean.actualizarProducto}"
+                                                                 icon="pi pi-user-plus" update="@form"/>
+                                            </div>
+                                            <p:growl showDetail="true" for="msj-bean"/>
+                                        </div>
+                                    </h:form>
+                                </p:card>
+
+                            </p:dialog>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <p:dialog id="dialogoConfirmacionEliminar" header="Confirmación" modal="true" widgetVar="confirmacionEliminar"
+                  Height="400px"
+                  width="31%" showEffect="fade" draggable="false" rendered="#{seguridadBean.autenticado}">
+            <p>¿Está seguro de que desea eliminar el producto?</p>
+            <div class="container" align="center" style="margin-top: 30px">
+                <p:commandButton value="Aceptar" styleClass="btn-white border-secondary bg-white"
+                                 style="height: 35px; margin-right: 10px; text-align: center"
+                                 action="#{productoBean.eliminarProducto}"/>
+                <p:commandButton value="Cancelar" styleClass="rounded-button ui-button-info"
+                                 style="font-size: 15px;" action="/usuario/perfil?faces-redirect=true"/>
+            </div>
+        </p:dialog>
+
+        <p:dialog id="dialogoConfirmacionSubasta" header="Confirmación" modal="true" widgetVar="confirmacionSubastar"
+                  Height="400px"
+                  width="31%" showEffect="fade" draggable="false" rendered="#{seguridadBean.autenticado}">
+            <p>¿Está seguro de que desea subastar el producto?</p>
+            <div class="container" align="center" style="margin-top: 30px">
+                <p:commandButton value="Aceptar" styleClass="btn-white border-secondary bg-white"
+                                 style="height: 35px; margin-right: 10px; text-align: center"
+                                 action="#{productoBean.subastarProducto}"/>
+                <p:commandButton value="Cancelar" styleClass="rounded-button ui-button-info"
+                                 style="font-size: 15px;" onclick="PF('confirmacionSubastar').hide()"/>
+            </div>
+        </p:dialog>
+    </ui:define>
+</ui:composition>
+
+
+</html>

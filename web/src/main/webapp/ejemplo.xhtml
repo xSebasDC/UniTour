@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"></link>
+</h:head>
+<h:body>
+    <div id="header">
+    <header>
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <span class="pi pi-shopping-cart" style="font-size: 2rem; margin-right: 10px"></span>
+                        <span class="fs-4">UniShop</span>
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small" style="text-align: center">
+                        <li>
+                            <a href="index.xhtml" class="nav-link text-white">
+                                <i class = "pi pi-home bi d-block mx-auto mb-1" style="font-size: 2rem"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="usuario/crear_producto.xhtml" class="nav-link text-white">
+                                <i class = "pi pi-save bi d-block mx-auto mb-1" style="font-size: 2rem"></i>
+                                Crear producto
+                            </a>
+                        </li>
+                        <li>
+                            <a href="usuario/perfil.xhtml" class="nav-link text-white">
+                                <i class = "pi pi-user bi d-block mx-auto mb-1" style="font-size: 2rem"></i>
+                                Perfil del usuario
+                            </a>
+                        </li>
+                        <li>
+                            <a href="usuario/mis_productos.xhtml" class="nav-link text-white">
+                                <i class = "pi pi-star bi d-block mx-auto mb-1" style="font-size: 2rem"></i>
+                                Mis productos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="compras_usuario.xhtml.xhtml" class="nav-link text-white">
+                                <i class = "pi pi-shopping-cart bi d-block mx-auto mb-1" style="font-size: 2rem"></i>
+                                Compras
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="px-3 py-2 border-bottom mb-3">
+            <div class="container d-flex flex-wrap justify-content-center">
+
+                    <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto input-search ui-inputgroup">
+                        <h:form>
+                        <p:inputText style="width: 300px;" placeholder="¿Qué producto está buscando?" required="true" value="#{busquedaBean.busqueda}" />
+                        <p:commandButton icon="pi pi-search" action="#{busquedaBean.buscar}" update="@form"/>
+                        </h:form>
+                    </div>
+
+                <div class="text-end">
+                    <ul class="nav">
+                        <li class="nav-item"><a href="#" class="btn btn-light text-dark m1-2">Iniciar sesión</a></li>
+                        <li class="nav-item"><a href="registrar_usuario2.xhtml" Class="btn btn-primary">Registrar usuario</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    </div>
+
+    <div id="content">
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</h:body>
+</html>
